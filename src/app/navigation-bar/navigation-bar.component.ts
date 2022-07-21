@@ -12,4 +12,8 @@ export class NavigationBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isActive(){
+    return false;
+    // placeholder for isActive from routing app
+  }
 }
