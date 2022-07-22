@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SearchComponent } from 'src/app/search/search.component';
 import { Product } from '../product.model';
+import { ApiHttpService } from 'src/app/services/api-http.service';
 
 @Component({
   selector: 'app-product-list',
@@ -8,15 +9,13 @@ import { Product } from '../product.model';
   styleUrls: ['./product-list.component.sass']
 })
 export class ProductListComponent implements OnInit {
-  searchResults;
-  constructor(searchComponent:SearchComponent) {
-    this.searchResults = searchComponent.getSearchResults();
+  productList;
+  constructor(public httpService: ApiHttpService) {
+    this.productList = httpService.productList;
    }
 
   ngOnInit(): void {
+    this.productList = this.httpService.productList;
   }
 
-  setSearchResults(productList:Product[]){
-    this.searchResults = productList;
-  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductListComponent } from '../product/product-list/product-list.component';
 import { Product } from '../product/product.model';
 import { ApiHttpService } from '../services/api-http.service';
 
@@ -20,23 +21,7 @@ export class SearchComponent implements OnInit {
 
   onClick(){
     console.log(this.searchTerm);
-    this.httpService.search(this.searchTerm)
-      .subscribe(data => {
-        data["products"].forEach(productObj => {
-          console.log(productObj["_id"]);
-          // console.log(productObj["product_name_en"]);
-          // console.log(productObj["_keywords"]);
-          // console.log(productObj["ingredients_text_en"]);
-          // console.log(productObj["nutriments"]);
-          // console.log(productObj["nutriscore_data"]);
-          // console.log(productObj["selected_images"]["front"]["display"]["en"]);
-          // console.log(productObj["selected_images"]["front"]["thumb"]["en"]);
-          // console.log(productObj["selected_images"]["nutrition"]["display"]["en"]);
-          this.searchResults.push(this.mapObjToProduct(productObj));
-        });
-        console.log(this.searchResults);
-      })
-    
+    this.httpService.search(this.searchTerm)  
   }
 
   mapObjToProduct(pO: Object){
