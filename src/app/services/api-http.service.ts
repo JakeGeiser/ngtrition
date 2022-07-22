@@ -13,7 +13,6 @@ export class ApiHttpService {
   }
 
   public search(searchInput: string){
-    if(!validString(searchInput)){return;}
     let url = `https://us.openfoodfacts.org/cgi/search.pl?search_terms=${searchInput}&search_simple=1&action=process&json=true`;
     return this.get(url);
   }

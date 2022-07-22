@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../product/product.model';
+import { ApiHttpService } from '../services/api-http.service';
 
 @Component({
   selector: 'app-search',
@@ -6,10 +8,59 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search.component.sass']
 })
 export class SearchComponent implements OnInit {
-
-  constructor() { }
+  searchTerm: string;
+  searchResults: Product[] = [];
+  constructor(public httpService: ApiHttpService) { }
 
   ngOnInit(): void {
+  
   }
+
+  isDisabled: boolean = false;
+
+  onClick(){
+    console.log(this.searchTerm);
+    this.httpService.search(this.searchTerm)
+      .subscribe(data => {
+        data["products"].forEach(productObj => {
+          console.log(productObj["_id"]);
+          // console.log(productObj["product_name_en"]);
+          // console.log(productObj["_keywords"]);
+          // console.log(productObj["ingredients_text_en"]);
+          // console.log(productObj["nutriments"]);
+          // console.log(productObj["nutriscore_data"]);
+          // console.log(productObj["selected_images"]["front"]["display"]["en"]);
+          // console.log(productObj["selected_images"]["front"]["thumb"]["en"]);
+          // console.log(productObj["selected_images"]["nutrition"]["display"]["en"]);
+          this.searchResults.push(this.mapObjToProduct(productObj));
+        });
+        console.log(this.searchResults);
+      })
+    
+  }
+
+  mapObjToProduct(pO: Object){
+    let id = pO["_id"] ? pO["_id"]: "Blank";
+    let name = pO["product_name_en"] ? pO["product_name_en"]: "Blank";
+    let imgFrontDisplay = (((pO["selected_images"] || {})["front"] || {})["display"] || {})["en"] ? pO["selected_images"]["front"]["display"]["en"] : "#";
+    let imgFrontThumb = (((pO["selected_images"] || {})["front"] || {})["thumb"] || {})["en"] ? pO["selected_images"]["front"]["thumb"]["en"] : "#";
+    let imgNutrDisplay = (((pO["selected_images"] || {})["nutrition"] || {})["display"] || {})["en"] ? pO["selected_images"]["nutrition"]["display"]["en"] : "#";
+    return new Product(
+      id,
+      name,
+      pO["_keywords"],
+      pO["ingredients_text_en"],
+      pO["nutriments"],
+      pO["nutriscore_data"],
+      imgFrontDisplay,
+      imgFrontThumb,
+      imgNutrDisplay
+    );
+  }
+
+  getSearchResults(){
+    return this.searchResults;
+  }
+  
 
 }

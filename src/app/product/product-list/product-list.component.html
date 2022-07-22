@@ -1,6 +1,3 @@
-<div class="container-fluid">
-    <ul class="product-list">
-        <li class="product-card"><app-product-item></app-product-item></li>
-        <li class="product-card"><app-product-item></app-product-item></li>
-    </ul>
-</div>
+<ul class="product-list">
+        <app-product-item *ngFor="let product of searchResults"></app-product-item>
+</ul>

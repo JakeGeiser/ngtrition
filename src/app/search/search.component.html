@@ -1,1 +1,10 @@
-<p>search works!</p>
+<div class="input-group">
+    <div class="form-outline">
+      <input type="text" [(ngModel)]="searchTerm">
+      <!-- <label class="form-label" for="form1">Search</label> -->
+    </div>
+    <button type="button" class="btn btn-primary" (click)="onClick()" [disabled]="isDisabled">
+      Search
+    </button>
+  </div>
+  

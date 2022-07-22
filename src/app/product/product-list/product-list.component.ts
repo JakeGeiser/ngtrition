@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { SearchComponent } from 'src/app/search/search.component';
+import { Product } from '../product.model';
 
 @Component({
   selector: 'app-product-list',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-list.component.sass']
 })
 export class ProductListComponent implements OnInit {
-
-  constructor() { }
+  searchResults;
+  constructor(searchComponent:SearchComponent) {
+    this.searchResults = searchComponent.getSearchResults();
+   }
 
   ngOnInit(): void {
   }
 
+  setSearchResults(productList:Product[]){
+    this.searchResults = productList;
+  }
 }

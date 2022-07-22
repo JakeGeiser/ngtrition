@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { SearchComponent } from './search/search.component';
 import { OptionsComponent } from './search/options/options.component';
 import { GetStartedComponent } from './get-started/get-started.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { ApiHttpService } from './services/api-http.service';
 
 @NgModule({
   declarations: [
@@ -36,9 +38,10 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [ApiHttpService,SearchComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
