@@ -6,16 +6,26 @@ import { ApiHttpService } from 'src/app/services/api-http.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.sass']
+  styleUrls: ['./product-list.component.sass'],
+  providers:[
+    {
+      provide: 'productList',
+      useValue: 'product-List'
+    }
+  ]
 })
 export class ProductListComponent implements OnInit {
-  productList;
+  productList: Product[];
   constructor(public httpService: ApiHttpService) {
-    this.productList = httpService.productList;
+    
    }
 
   ngOnInit(): void {
-    this.productList = this.httpService.productList;
+    
+  }
+  
+  public onApiCallCompletion(products:Product[]){
+    this.productList = products;
   }
 
 }

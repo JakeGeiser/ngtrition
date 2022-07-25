@@ -21,7 +21,8 @@ export class SearchComponent implements OnInit {
 
   onClick(){
     console.log(this.searchTerm);
-    this.httpService.search(this.searchTerm)  
+    let productList = this.httpService.search(this.searchTerm)  
+    this.searchResults = productList;
   }
 
   mapObjToProduct(pO: Object){
@@ -30,17 +31,17 @@ export class SearchComponent implements OnInit {
     let imgFrontDisplay = (((pO["selected_images"] || {})["front"] || {})["display"] || {})["en"] ? pO["selected_images"]["front"]["display"]["en"] : "#";
     let imgFrontThumb = (((pO["selected_images"] || {})["front"] || {})["thumb"] || {})["en"] ? pO["selected_images"]["front"]["thumb"]["en"] : "#";
     let imgNutrDisplay = (((pO["selected_images"] || {})["nutrition"] || {})["display"] || {})["en"] ? pO["selected_images"]["nutrition"]["display"]["en"] : "#";
-    return new Product(
-      id,
-      name,
-      pO["_keywords"],
-      pO["ingredients_text_en"],
-      pO["nutriments"],
-      pO["nutriscore_data"],
-      imgFrontDisplay,
-      imgFrontThumb,
-      imgNutrDisplay
-    );
+    let productT = new Product();
+      productT.id = id;
+      productT.name = name;
+      productT.keywords = pO["_keywords"];
+      productT.ingredients = pO["ingredients_text_en"];
+      productT.nutriments = pO["nutriments"];
+      productT.nutriscore = pO["nutriscore_data"];
+      productT.imageFrontDisplay = imgFrontDisplay;
+      productT.imageFrontThumb = imgFrontThumb;
+      productT.imageNutritionDisplay = imgNutrDisplay;
+    return productT;
   }
 
   getSearchResults(){
