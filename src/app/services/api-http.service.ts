@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { validString } from 'src/utils/string-util';
-import { Product } from '../product/product.model';
+import { Product } from '../product/product';
 @Injectable()
 export class ApiHttpService {
   productList: Product[] = []
@@ -39,16 +39,17 @@ export class ApiHttpService {
     let imgFrontDisplay = (((pO["selected_images"] || {})["front"] || {})["display"] || {})["en"] ? pO["selected_images"]["front"]["display"]["en"] : "#";
     let imgFrontThumb = (((pO["selected_images"] || {})["front"] || {})["thumb"] || {})["en"] ? pO["selected_images"]["front"]["thumb"]["en"] : "#";
     let imgNutrDisplay = (((pO["selected_images"] || {})["nutrition"] || {})["display"] || {})["en"] ? pO["selected_images"]["nutrition"]["display"]["en"] : "#";
-    let productT = new Product();
-      productT.id = id;
-      productT.name = name;
-      productT.keywords = pO["_keywords"];
-      productT.ingredients = pO["ingredients_text_en"];
-      productT.nutriments = pO["nutriments"];
-      productT.nutriscore = pO["nutriscore_data"];
-      productT.imageFrontDisplay = imgFrontDisplay;
-      productT.imageFrontThumb = imgFrontThumb;
-      productT.imageNutritionDisplay = imgNutrDisplay;
+    let productT = {
+      "id" : id,
+      "name" : name,
+      "keywords" : pO["_keywords"],
+      "ingredients" : pO["ingredients_text_en"],
+      "nutriments" : pO["nutriments"],
+      "nutriscore" : pO["nutriscore_data"],
+      "imageFrontDisplay" : imgFrontDisplay,
+      "imageFrontThumb" : imgFrontThumb,
+      "imageNutritionDisplay" : imgNutrDisplay,
+    }
     return productT;
   }
 }
