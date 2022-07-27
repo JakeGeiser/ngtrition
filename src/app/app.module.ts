@@ -9,13 +9,15 @@ import { SearchComponent } from './search/search.component';
 import { OptionsComponent } from './search/options/options.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { ApiHttpService } from './services/api-http.service';
+import { ProductCardComponent } from './product/product-card/product-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
     OptionsComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,

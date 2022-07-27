@@ -9,7 +9,7 @@ import { ApiHttpService } from '../services/api-http.service';
 })
 export class SearchComponent implements OnInit {
   searchTerm: string;
-  searchResults: Product[] = [];
+
   constructor(public httpService: ApiHttpService) { }
 
   ngOnInit(): void {
@@ -20,11 +20,10 @@ export class SearchComponent implements OnInit {
 
   onClick(){
     console.log(this.searchTerm);
-    let productList = this.httpService.search(this.searchTerm)  
-    this.searchResults = productList;
+    this.httpService.search(this.searchTerm)
   }
 
-
+  
   
 
 }

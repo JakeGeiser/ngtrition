@@ -9,14 +9,6 @@
   </div>
   <div class="container-fluid" id="product-list-container">
     <ul class="product-list">
-      <li class="product-card" *ngFor="let product of searchResults">
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src={{product.imageFrontThumb}} alt="thumb img">
-          <div class="card-body">
-            <h5 class="card-title">{{product.name}}</h5>
-            <p class="card-text">{{product.ingredients}}</p>
-          </div>
-        </div>
-      </li>
+      <app-product-card *ngFor="let prod of httpService.searchResults" [product]="prod"></app-product-card>
     </ul>
   </div>
